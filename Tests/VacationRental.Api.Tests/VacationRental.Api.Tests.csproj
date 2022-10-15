@@ -18,7 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\VacationRental.Api\VacationRental.Api.csproj" />
+    <ProjectReference Include="..\..\Application\Application.VacationRental.Booking\Application.VacationRental.Booking.csproj" />
+    <ProjectReference Include="..\..\Infraestructure\API\VacationRental.Api\VacationRental.Api.csproj" />
   </ItemGroup>
 
 </Project>

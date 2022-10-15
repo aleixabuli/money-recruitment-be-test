@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using Application.VacationRental.Booking.DTO.Response;
+using Infra.VacationalRental.Common.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +28,13 @@ namespace VacationRental.Api
             services.AddSwaggerGen(opts => opts.SwaggerDoc("v1", new Info { Title = "Vacation rental information", Version = "v1" }));
 
             services.AddSingleton<IDictionary<int, RentalViewModel>>(new Dictionary<int, RentalViewModel>());
-            services.AddSingleton<IDictionary<int, BookingViewModel>>(new Dictionary<int, BookingViewModel>());
+            services.AddSingleton<IDictionary<int, BookingViewModelResponse>>(new Dictionary<int, BookingViewModelResponse>());
+            
+            //DEPENDENCY INJECTIONS
+            services
+                .AddApplicationDependencyInjection()
+                .AddDomainDependencyInjection()
+                .AddPersistenceDependencyInjection();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

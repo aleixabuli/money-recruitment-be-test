@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Application.VacationRental.Booking.DTO.Request;
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -32,7 +33,7 @@ namespace VacationRental.Api.Tests
                 postRentalResult = await postRentalResponse.Content.ReadAsAsync<ResourceIdViewModel>();
             }
 
-            var postBooking1Request = new BookingBindingModel
+            var postBooking1Request = new BookingBindingModelRequest
             {
                  RentalId = postRentalResult.Id,
                  Nights = 2,
@@ -46,7 +47,7 @@ namespace VacationRental.Api.Tests
                 postBooking1Result = await postBooking1Response.Content.ReadAsAsync<ResourceIdViewModel>();
             }
 
-            var postBooking2Request = new BookingBindingModel
+            var postBooking2Request = new BookingBindingModelRequest
             {
                 RentalId = postRentalResult.Id,
                 Nights = 2,

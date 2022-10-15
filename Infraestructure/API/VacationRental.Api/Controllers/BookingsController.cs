@@ -1,5 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+//using System.Web.Http;
+using Application.VacationRental.Booking.DTO.Request;
+using Application.VacationRental.Booking.DTO.Response;
+using Application.VacationRental.Booking.UseCaseContracts;
 using Microsoft.AspNetCore.Mvc;
 using VacationRental.Api.Models;
 
@@ -10,28 +15,37 @@ namespace VacationRental.Api.Controllers
     public class BookingsController : ControllerBase
     {
         private readonly IDictionary<int, RentalViewModel> _rentals;
-        private readonly IDictionary<int, BookingViewModel> _bookings;
+        private readonly IDictionary<int, BookingViewModelResponse> _bookings;
+        private IGetBooking _getBooking;
 
         public BookingsController(
             IDictionary<int, RentalViewModel> rentals,
-            IDictionary<int, BookingViewModel> bookings)
+            IDictionary<int, BookingViewModelResponse> bookings,
+            IGetBooking getBooking
+            )
         {
             _rentals = rentals;
             _bookings = bookings;
+            _getBooking = getBooking;
         }
 
         [HttpGet]
         [Route("{bookingId:int}")]
-        public BookingViewModel Get(int bookingId)
+        public async Task<ActionResult> Get(int bookingId)//<BookingViewModelResponse>> Get(int bookingId)
         {
+            
+            var response = await _getBooking.Execute(bookingId);
+
+            return Ok(response);
+            /*
             if (!_bookings.ContainsKey(bookingId))
                 throw new ApplicationException("Booking not found");
 
-            return _bookings[bookingId];
+            return _bookings[bookingId];*/
         }
 
         [HttpPost]
-        public ResourceIdViewModel Post(BookingBindingModel model)
+        public ResourceIdViewModel Post(BookingBindingModelRequest model)
         {
             if (model.Nights <= 0)
                 throw new ApplicationException("Nigts must be positive");
@@ -58,7 +72,7 @@ namespace VacationRental.Api.Controllers
 
             var key = new ResourceIdViewModel { Id = _bookings.Keys.Count + 1 };
 
-            _bookings.Add(key.Id, new BookingViewModel
+            _bookings.Add(key.Id, new BookingViewModelResponse
             {
                 Id = key.Id,
                 Nights = model.Nights,

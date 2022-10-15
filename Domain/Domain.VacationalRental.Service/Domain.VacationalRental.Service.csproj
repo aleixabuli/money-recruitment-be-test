@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Domain.VacationalRental.Repository.Contracts\Domain.VacationalRental.Repository.Contracts.csproj" />
+    <ProjectReference Include="..\Domain.VacationalRental.Service.Contracts\Domain.VacationalRental.Service.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

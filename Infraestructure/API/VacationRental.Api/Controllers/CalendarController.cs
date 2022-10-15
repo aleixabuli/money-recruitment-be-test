@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Application.VacationRental.Booking.DTO.Response;
 using Microsoft.AspNetCore.Mvc;
 using VacationRental.Api.Models;
 
@@ -10,11 +11,11 @@ namespace VacationRental.Api.Controllers
     public class CalendarController : ControllerBase
     {
         private readonly IDictionary<int, RentalViewModel> _rentals;
-        private readonly IDictionary<int, BookingViewModel> _bookings;
+        private readonly IDictionary<int, BookingViewModelResponse> _bookings;
 
         public CalendarController(
             IDictionary<int, RentalViewModel> rentals,
-            IDictionary<int, BookingViewModel> bookings)
+            IDictionary<int, BookingViewModelResponse> bookings)
         {
             _rentals = rentals;
             _bookings = bookings;

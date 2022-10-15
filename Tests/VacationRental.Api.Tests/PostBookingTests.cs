@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Application.VacationRental.Booking.DTO.Request;
+using Application.VacationRental.Booking.DTO.Response;
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -32,7 +34,7 @@ namespace VacationRental.Api.Tests
                 postRentalResult = await postRentalResponse.Content.ReadAsAsync<ResourceIdViewModel>();
             }
 
-            var postBookingRequest = new BookingBindingModel
+            var postBookingRequest = new BookingBindingModelRequest
             {
                  RentalId = postRentalResult.Id,
                  Nights = 3,
@@ -50,7 +52,7 @@ namespace VacationRental.Api.Tests
             {
                 Assert.True(getBookingResponse.IsSuccessStatusCode);
 
-                var getBookingResult = await getBookingResponse.Content.ReadAsAsync<BookingViewModel>();
+                var getBookingResult = await getBookingResponse.Content.ReadAsAsync<BookingViewModelResponse>();
                 Assert.Equal(postBookingRequest.RentalId, getBookingResult.RentalId);
                 Assert.Equal(postBookingRequest.Nights, getBookingResult.Nights);
                 Assert.Equal(postBookingRequest.Start, getBookingResult.Start);
@@ -72,7 +74,7 @@ namespace VacationRental.Api.Tests
                 postRentalResult = await postRentalResponse.Content.ReadAsAsync<ResourceIdViewModel>();
             }
 
-            var postBooking1Request = new BookingBindingModel
+            var postBooking1Request = new BookingBindingModelRequest
             {
                 RentalId = postRentalResult.Id,
                 Nights = 3,
@@ -84,7 +86,7 @@ namespace VacationRental.Api.Tests
                 Assert.True(postBooking1Response.IsSuccessStatusCode);
             }
 
-            var postBooking2Request = new BookingBindingModel
+            var postBooking2Request = new BookingBindingModelRequest
             {
                 RentalId = postRentalResult.Id,
                 Nights = 1,
