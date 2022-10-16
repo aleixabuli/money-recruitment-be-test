@@ -22,6 +22,29 @@ namespace Persistence.VacationalRental.Booking.Repository
             _rentals = rentals;
         }
 
+        public void Create(
+            int keyId, 
+            int units
+            )
+        {
+            _rentals.Add(keyId, new RentalDB
+            {
+                Id = keyId,
+                Units = units
+            });
+        }
+
+        public async Task<IDictionary<int, Domain.VacationalRental.Model.BookingModel.Rental>> GetAll()
+        {
+            IDictionary<int, Domain.VacationalRental.Model.BookingModel.Rental> result = new Dictionary<int, Domain.VacationalRental.Model.BookingModel.Rental>();
+            foreach (var booking in _rentals)
+            {
+                result.Add(booking.Key, _rentalMapper.MapToDomainModel(booking.Value));
+            }
+
+            return result;
+        }
+
         public async Task<Domain.VacationalRental.Model.BookingModel.Rental> GetById(int rentalId)
         {
             if (!_rentals.ContainsKey(rentalId))

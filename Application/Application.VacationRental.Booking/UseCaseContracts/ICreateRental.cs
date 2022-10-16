@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 
 namespace Application.VacationRental.Booking.UseCaseContracts
 {
-    public interface ICreateBooking
+    public interface ICreateRental
     {
-        Task<BookingResourceIdViewModelResponse> Execute(BookingBindingModelRequest booking);
+        Task<RentalResourceIdViewModelResponse> Execute(RentalBindingModelRequest rental);
     }
 }

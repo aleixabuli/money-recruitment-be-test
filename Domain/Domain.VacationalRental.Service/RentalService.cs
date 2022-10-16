@@ -1,4 +1,5 @@
-﻿using Domain.VacationalRental.Model.BookingModel;
+﻿using Application.VacationRental.Booking.DTO.Response;
+using Domain.VacationalRental.Model.BookingModel;
 using Domain.VacationalRental.Repository.Contracts.Booking;
 using Domain.VacationalRental.Service.Contracts.BookingServices;
 using System;
@@ -33,6 +34,20 @@ namespace Domain.VacationalRental.Service
             }
 
             return rental;
+        }
+
+        public async Task<object> CreateRental(int rentalUnits)
+        {
+            var allRentals = await _rentalRepository.GetAll();
+
+            var key = new RentalResourceIdViewModelResponse { Id = allRentals.Keys.Count + 1 };
+
+            _rentalRepository.Create(
+                key.Id, 
+                rentalUnits
+                );
+
+            return key;
         }
     }
 }

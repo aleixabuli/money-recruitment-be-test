@@ -14,7 +14,12 @@ namespace Infra.VacationalRental.Common.Extensions
             services
                 .AddTransient<IGetBooking, GetBooking>()
                 .AddTransient<ICreateBooking, CreateBooking>()
-                .AddTransient<IMapperApplication<Domain.VacationalRental.Model.BookingModel.Booking, BookingViewModelResponse>, BookingToBookingViewModelResponse>();
+                .AddTransient<IGetRental, GetRental>()
+                .AddTransient<ICreateRental, CreateRental>()
+
+                .AddTransient<IMapperApplication<Domain.VacationalRental.Model.BookingModel.Booking, BookingViewModelResponse>, BookingToBookingViewModelResponse>()
+                .AddTransient<IMapperApplication<Domain.VacationalRental.Model.BookingModel.Rental, RentalViewModelResponse>, RentalToRentalViewModelResponse>();
+            ;
 
             return services;
         }

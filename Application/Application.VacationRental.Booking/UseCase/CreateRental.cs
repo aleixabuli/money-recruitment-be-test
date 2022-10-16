@@ -12,13 +12,13 @@ using System.Web.Http;
 
 namespace Application.VacationRental.Booking.UseCase
 {
-    public class CreateBooking : ICreateBooking
+    public class CreateRental : ICreateRental
     {
         IBookingService _bookingService;
         IRentalService _rentalService;
         private readonly IMapperApplication<Domain.VacationalRental.Model.BookingModel.Booking, BookingViewModelResponse> _mapperAplication;
 
-        public CreateBooking(
+        public CreateRental(
             IBookingService bookingService,
             IRentalService rentalService,
             IMapperApplication<Domain.VacationalRental.Model.BookingModel.Booking, BookingViewModelResponse> mapperAplication
@@ -29,21 +29,40 @@ namespace Application.VacationRental.Booking.UseCase
             _rentalService = rentalService;
         }
 
-        public async Task<BookingResourceIdViewModelResponse> Execute(BookingBindingModelRequest newBookingRequest)
+        public async Task<BookingViewModelResponse> Execute(BookingBindingModelRequest newBookingRequest)
         {
             _bookingService.VerifyHasNights(newBookingRequest.Nights);
 
             await _rentalService.VerifyById(newBookingRequest.RentalId);
 
-            await _bookingService.VerifyRentalUnitsAvailability(newBookingRequest.Nights, newBookingRequest.RentalId, newBookingRequest.Start);
+            await _bookingService.VerifyRentalUnitsAvailability(
+                newBookingRequest.Nights, 
+                newBookingRequest.RentalId, 
+                newBookingRequest.Start
+                );
 
-            BookingResourceIdViewModelResponse newBooking = (BookingResourceIdViewModelResponse) await _bookingService.CreateBooking(
+            BookingViewModelResponse newBooking = (BookingViewModelResponse) await _bookingService.CreateBooking(
                 newBookingRequest.Nights, 
                 newBookingRequest.RentalId, 
                 newBookingRequest.Start
                 );
 
             return newBooking;
+        }
+
+        public async Task<RentalResourceIdViewModelResponse> Execute(RentalBindingModelRequest rental)
+        {
+            var result = (RentalResourceIdViewModelResponse) await _rentalService.CreateRental(rental.Units);
+            /*
+            var key = new ResourceIdViewModel { Id = _rentals.Keys.Count + 1 };
+
+            _rentals.Add(key.Id, new RentalViewModel
+            {
+                Id = key.Id,
+                Units = model.Units
+            });
+            */
+            return result;
         }
     }
 }
