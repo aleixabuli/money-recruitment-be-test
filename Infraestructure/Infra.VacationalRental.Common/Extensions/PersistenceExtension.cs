@@ -16,12 +16,16 @@ namespace Infra.VacationalRental.Common.Extensions
         {
             services
                 .AddTransient<IBookingRepository, BookingRepository>()
+                .AddTransient<IRentalRepository, RentalRepository>()
+
                 .AddTransient<IMapperPersistence<Domain.VacationalRental.Model.BookingModel.Booking, BookingDB>,BookingMapper>()
-                
+                .AddTransient<IMapperPersistence<Domain.VacationalRental.Model.BookingModel.Rental, RentalDB>, RentalMapper>()
+
                 //.AddSingleton<IDictionary<int, RentalViewModel>>(new Dictionary<int, RentalViewModel>())
                 //.AddSingleton<IDictionary<int, BookingViewModelResponse>>(new Dictionary<int, BookingViewModelResponse>())
+                .AddSingleton<IDictionary<int, RentalDB>>(new Dictionary<int, RentalDB>())
                 .AddSingleton<IDictionary<int, BookingDB>>(new Dictionary<int, BookingDB>())
-                ;
+            ;
 
             return services;
         }

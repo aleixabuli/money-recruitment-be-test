@@ -23,6 +23,17 @@ namespace Persistence.VacationalRental.Booking.Repository
             _bookings = bookings;
         }
 
+        public async Task<IDictionary<int, Domain.VacationalRental.Model.BookingModel.Booking>> GetAll()
+        {
+            IDictionary<int, Domain.VacationalRental.Model.BookingModel.Booking> result = new Dictionary<int, Domain.VacationalRental.Model.BookingModel.Booking>();
+            foreach (var booking in _bookings)
+            {
+                result.Add(booking.Key, _bookingMapper.MapToDomainModel(booking.Value));
+            }
+
+            return result;
+        }
+
         public async Task<Domain.VacationalRental.Model.BookingModel.Booking> GetById(int bookingId)
         {
             if (!_bookings.ContainsKey(bookingId))
@@ -31,6 +42,21 @@ namespace Persistence.VacationalRental.Booking.Repository
             }
             var bookingTarget = _bookingMapper.MapToDomainModel(_bookings[bookingId]);
             return bookingTarget;
+        }
+
+        public async Task Create(
+            int keyId,
+            int bookingNights,
+            int rentalId,
+            DateTime bookingStart)
+        {
+            _bookings.Add(keyId, new BookingDB
+            {
+                Id = keyId,
+                Nights = bookingNights,
+                RentalId = rentalId,
+                Start = bookingStart
+            });
         }
     }
 }

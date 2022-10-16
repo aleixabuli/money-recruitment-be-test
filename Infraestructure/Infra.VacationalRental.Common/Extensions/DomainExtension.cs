@@ -11,7 +11,11 @@ namespace Infra.VacationalRental.Common.Extensions
     {
         public static IServiceCollection AddDomainDependencyInjection(this IServiceCollection services)
         {
-            services.AddTransient<IBookingService, BookingService>();
+            services
+                .AddTransient<IBookingService, BookingService>()
+                .AddTransient<IRentalService, RentalService>()
+                ;
+
             return services;
         }
     }

@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Application\Application.VacationRental.Booking\Application.VacationRental.Booking.csproj" />
     <ProjectReference Include="..\..\Domain.VacationalRental.Repository.Contracts\Domain.VacationalRental.Repository.Contracts.csproj" />
     <ProjectReference Include="..\Domain.VacationalRental.Service.Contracts\Domain.VacationalRental.Service.Contracts.csproj" />
   </ItemGroup>

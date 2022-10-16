@@ -27,8 +27,8 @@ namespace VacationRental.Api
 
             services.AddSwaggerGen(opts => opts.SwaggerDoc("v1", new Info { Title = "Vacation rental information", Version = "v1" }));
 
-            services.AddSingleton<IDictionary<int, RentalViewModel>>(new Dictionary<int, RentalViewModel>());
-            services.AddSingleton<IDictionary<int, BookingViewModelResponse>>(new Dictionary<int, BookingViewModelResponse>());
+            //services.AddSingleton<IDictionary<int, RentalViewModel>>(new Dictionary<int, RentalViewModel>());
+            //services.AddSingleton<IDictionary<int, BookingViewModelResponse>>(new Dictionary<int, BookingViewModelResponse>());
             
             //DEPENDENCY INJECTIONS
             services

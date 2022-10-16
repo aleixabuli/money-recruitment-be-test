@@ -14,19 +14,22 @@ namespace VacationRental.Api.Controllers
     [ApiController]
     public class BookingsController : ControllerBase
     {
-        private readonly IDictionary<int, RentalViewModel> _rentals;
-        private readonly IDictionary<int, BookingViewModelResponse> _bookings;
+        //private readonly IDictionary<int, RentalViewModel> _rentals;
+        //private readonly IDictionary<int, BookingViewModelResponse> _bookings;
         private IGetBooking _getBooking;
+        private readonly ICreateBooking _createBooking;
 
         public BookingsController(
-            IDictionary<int, RentalViewModel> rentals,
-            IDictionary<int, BookingViewModelResponse> bookings,
-            IGetBooking getBooking
+            //IDictionary<int, RentalViewModel> rentals,
+            //IDictionary<int, BookingViewModelResponse> bookings,
+            IGetBooking getBooking,
+            ICreateBooking createBooking
             )
         {
-            _rentals = rentals;
-            _bookings = bookings;
+            //_rentals = rentals;
+            //_bookings = bookings;
             _getBooking = getBooking;
+            _createBooking = createBooking;
         }
 
         [HttpGet]
@@ -45,8 +48,10 @@ namespace VacationRental.Api.Controllers
         }
 
         [HttpPost]
-        public ResourceIdViewModel Post(BookingBindingModelRequest model)
+        public async Task<ActionResult> Post(BookingBindingModelRequest booking) //ResourceIdViewModel Post(BookingBindingModelRequest model)
         {
+            var response = await _createBooking.Execute(booking);
+            /*
             if (model.Nights <= 0)
                 throw new ApplicationException("Nigts must be positive");
             if (!_rentals.ContainsKey(model.RentalId))
@@ -81,6 +86,9 @@ namespace VacationRental.Api.Controllers
             });
 
             return key;
+            */
+
+            return Ok(response);
         }
     }
 }

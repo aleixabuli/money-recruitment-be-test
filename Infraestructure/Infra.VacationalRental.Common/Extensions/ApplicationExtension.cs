@@ -4,9 +4,6 @@ using Application.VacationRental.Booking.Mapper;
 using Application.VacationRental.Booking.UseCase;
 using Application.VacationRental.Booking.UseCaseContracts;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Infra.VacationalRental.Common.Extensions
 {
@@ -16,6 +13,7 @@ namespace Infra.VacationalRental.Common.Extensions
         {
             services
                 .AddTransient<IGetBooking, GetBooking>()
+                .AddTransient<ICreateBooking, CreateBooking>()
                 .AddTransient<IMapperApplication<Domain.VacationalRental.Model.BookingModel.Booking, BookingViewModelResponse>, BookingToBookingViewModelResponse>();
 
             return services;
