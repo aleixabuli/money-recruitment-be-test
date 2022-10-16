@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Application\Application.VacationRental.Booking\Application.VacationRental.Booking.csproj" />
+    <ProjectReference Include="..\..\..\Application\Application.VacationRental.Calendar\Application.VacationRental.Calendar.csproj" />
     <ProjectReference Include="..\..\Infra.VacationalRental.Common\Infra.VacationalRental.Common.csproj" />
   </ItemGroup>
 

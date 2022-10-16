@@ -3,6 +3,8 @@ using Application.VacationRental.Booking.DTO.Response;
 using Application.VacationRental.Booking.Mapper;
 using Application.VacationRental.Booking.UseCase;
 using Application.VacationRental.Booking.UseCaseContracts;
+using Application.VacationRental.Calendar.UseCase;
+using Application.VacationRental.Calendar.UseCaseContracts;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Infra.VacationalRental.Common.Extensions
@@ -16,6 +18,7 @@ namespace Infra.VacationalRental.Common.Extensions
                 .AddTransient<ICreateBooking, CreateBooking>()
                 .AddTransient<IGetRental, GetRental>()
                 .AddTransient<ICreateRental, CreateRental>()
+                .AddTransient<IGetCalendar, GetCalendar>()
 
                 .AddTransient<IMapperApplication<Domain.VacationalRental.Model.BookingModel.Booking, BookingViewModelResponse>, BookingToBookingViewModelResponse>()
                 .AddTransient<IMapperApplication<Domain.VacationalRental.Model.BookingModel.Rental, RentalViewModelResponse>, RentalToRentalViewModelResponse>();

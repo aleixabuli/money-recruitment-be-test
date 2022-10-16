@@ -33,9 +33,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.VacationalRental.Mod
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence.VacationalRental.Common", "Persistence\Persistence.VacationalRental.Common\Persistence.VacationalRental.Common.csproj", "{CFDB180E-5C8D-427B-BA78-8388708BD571}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.VacationalRental.Common", "Application\Application.VacationalRental.Common\Application.VacationalRental.Common.csproj", "{5DFA0B3D-AAA4-4A4B-B819-AE689B84D2BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.VacationalRental.Common", "Application\Application.VacationalRental.Common\Application.VacationalRental.Common.csproj", "{5DFA0B3D-AAA4-4A4B-B819-AE689B84D2BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infra.VacationalRental.Common", "Infraestructure\Infra.VacationalRental.Common\Infra.VacationalRental.Common.csproj", "{3C52C705-353C-4BC8-BAB5-3D9367523FF3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra.VacationalRental.Common", "Infraestructure\Infra.VacationalRental.Common\Infra.VacationalRental.Common.csproj", "{3C52C705-353C-4BC8-BAB5-3D9367523FF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.VacationRental.Calendar", "Application\Application.VacationRental.Calendar\Application.VacationRental.Calendar.csproj", "{C9927570-93E4-470A-B5A8-70D10EC0157D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +89,10 @@ Global
 		{3C52C705-353C-4BC8-BAB5-3D9367523FF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C52C705-353C-4BC8-BAB5-3D9367523FF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C52C705-353C-4BC8-BAB5-3D9367523FF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9927570-93E4-470A-B5A8-70D10EC0157D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9927570-93E4-470A-B5A8-70D10EC0157D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9927570-93E4-470A-B5A8-70D10EC0157D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9927570-93E4-470A-B5A8-70D10EC0157D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -104,6 +110,7 @@ Global
 		{CFDB180E-5C8D-427B-BA78-8388708BD571} = {AAF73DBB-2B37-44FD-A4CE-23273953E369}
 		{5DFA0B3D-AAA4-4A4B-B819-AE689B84D2BD} = {F54BEECE-F9BB-4513-9C2B-0BA81421417F}
 		{3C52C705-353C-4BC8-BAB5-3D9367523FF3} = {B8FC815B-691A-41A0-8E9F-5237F4B9D9AD}
+		{C9927570-93E4-470A-B5A8-70D10EC0157D} = {F54BEECE-F9BB-4513-9C2B-0BA81421417F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6A5319C5-4F21-41BF-B8A7-BC45868FEC89}

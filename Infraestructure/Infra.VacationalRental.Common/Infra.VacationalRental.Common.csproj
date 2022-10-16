@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Application\Application.VacationRental.Booking\Application.VacationRental.Booking.csproj" />
+    <ProjectReference Include="..\..\Application\Application.VacationRental.Calendar\Application.VacationRental.Calendar.csproj" />
     <ProjectReference Include="..\..\Domain\Domain.VacationalRental.Service\Domain.VacationalRental.Service.csproj" />
     <ProjectReference Include="..\..\Persistence\Persistence.VacationalRental.Booking\Persistence.VacationalRental.Booking.csproj" />
   </ItemGroup>

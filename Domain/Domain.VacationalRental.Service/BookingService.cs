@@ -45,9 +45,9 @@ namespace Domain.VacationalRental.Service
             DateTime bookingStart
             )
         {
-            //THIS double foreach structure is VERY ineficient.
+            //THIS double foreach structure is VERY inefficient.
             //In an environment that we have a database, the "count"
-            //value will be extracted directly using a single query in the database
+            //value will be extracted directly using a single query from the database
 
             for (var i = 0; i < bookingNights; i++)
             {
@@ -55,9 +55,15 @@ namespace Domain.VacationalRental.Service
 
                 var allBookings = await _bookingRepository.GetAll();
 
+
                 foreach (var bookingForEach in allBookings.Values)
                 {
-                    count += IsBookingAvailableForRental(bookingForEach, bookingNights, rentalId, bookingStart);
+                    count += IsBookingAvailableForRental(
+                        bookingForEach, 
+                        bookingNights, 
+                        rentalId, 
+                        bookingStart
+                        );
                 }
 
                 var rental = await _rentalService.GetById(rentalId);
@@ -90,6 +96,20 @@ namespace Domain.VacationalRental.Service
             return key;
         }
 
+        public async Task<IDictionary<int, Booking>> GetAll() 
+        {
+            var allBookings = await _bookingRepository.GetAll();
+            return allBookings;
+        }
+
+        /// <summary>
+        /// Returns 1 if it is available, returns 0 if not
+        /// </summary>
+        /// <param name="bookingForEach"></param>
+        /// <param name="bookingNights"></param>
+        /// <param name="rentalId"></param>
+        /// <param name="bookingStart"></param>
+        /// <returns></returns>
         private int IsBookingAvailableForRental(Booking bookingForEach, int bookingNights, int rentalId, DateTime bookingStart)
         {
             int returValue = 0;
@@ -104,5 +124,6 @@ namespace Domain.VacationalRental.Service
 
             return returValue;
         }
+
     }
 }
