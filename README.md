@@ -9,10 +9,10 @@ I saved to `/Tests/PostmanCollection/LodgifyBooking.postman_collection.json` a f
 ##TODO:
 There is some thinks that, if I had more time, I would do:
 - Create a good management of the exceptions, so when the API returns an error, will show a proper message description and also a CORRECT `StatusCode`
+- Review another time the `GET api/v1/calendar` Calendar Controller endpoint. The code written there can be more readable and can be improved in terms of performance
 - Do more tests in the VacationalRental.Api.Tests project
 - Create the optional PUT endpoint
-- Review another time the `GET api/v1/calendar` Calendar Controller endpoint. The code written there can be more readable and can be improved in terms of performance
-- I do not had enough time to do a good tests in Postman. I know how Postman works and all the possibilities that offers, using the `Pre-requests` scripts and the `Tests`
+- I do not had enough time to do a good tests in Postman. I know how Postman works and all the possibilities that offers, using the `Pre-requests` scripts and the `Tests` you can configure your Postman tests as a complement of the standard code tests
 
 
 -----------------------------------------------------------
