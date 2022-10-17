@@ -21,6 +21,11 @@ namespace VacationRental.Api.Controllers
             _createRental = createRental;
         }
 
+        /// <summary>
+        /// Gets the rental giving its Id
+        /// </summary>
+        /// <param name="rentalId"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("{rentalId:int}")]
         public async Task<ActionResult> Get(int rentalId)
@@ -30,6 +35,11 @@ namespace VacationRental.Api.Controllers
             return Ok(rental);
         }
 
+        /// <summary>
+        /// Creates a Rental
+        /// </summary>
+        /// <param name="rental"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult> Post(RentalBindingModelRequest rental)
         {

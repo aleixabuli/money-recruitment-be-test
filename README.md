@@ -1,3 +1,23 @@
+#The solution applied
+
+##The structure
+Ï decided to apply here a DDD structure, applying the 3 big layers: application, infraestructure/persistence and domain, so the code will be more readable and expandable.
+
+##Postman
+I saved to `/Tests/PostmanCollection/LodgifyBooking.postman_collection.json` a file that you can import to postman, so you can test the API.
+
+##TODO:
+There is some thinks that, if I had more time, I would do:
+- Create a good management of the exceptions, so when the API returns an error, will show a proper message description and also a CORRECT `StatusCode`
+- Do more tests in the VacationalRental.Api.Tests project
+- Create the optional PUT endpoint
+- Review another time the `GET api/v1/calendar` Calendar Controller endpoint. The code written there can be more readable and can be improved in terms of performance
+- I do not had enough time to do a good tests in Postman. I know how Postman works and all the possibilities that offers, using the `Pre-requests` scripts and the `Tests`
+
+
+-----------------------------------------------------------
+
+
 ## How we'd like to recieve the soluion?
 
 1. Clone this repository and upload it as a new public repository in your github account

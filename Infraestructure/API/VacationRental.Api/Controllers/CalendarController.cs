@@ -18,6 +18,13 @@ namespace VacationRental.Api.Controllers
             _getCalendar = getCalendar;
         }
 
+        /// <summary>
+        /// Gets the calendar filtered by the RentalId, Start date and the number of nights
+        /// </summary>
+        /// <param name="rentalId">Reference of the rental</param>
+        /// <param name="start">Starting date to filter the calendar</param>
+        /// <param name="nights">Number of the nights to show on the calendar</param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult> Get(
             int rentalId,
