@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.VacationalRental.Ser
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.VacationalRental.Service", "Domain\Domain.VacationalRental.Service\Domain.VacationalRental.Service.csproj", "{8640D554-4F18-4DD2-9A96-4D6D0943C933}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.VacationalRental.Repository.Contracts", "Domain.VacationalRental.Repository.Contracts\Domain.VacationalRental.Repository.Contracts.csproj", "{83A9E05A-5B32-43F5-99D5-E9D2489494BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.VacationalRental.Repository.Contracts", "Domain\Domain.VacationalRental.Repository.Contracts\Domain.VacationalRental.Repository.Contracts.csproj", "{83A9E05A-5B32-43F5-99D5-E9D2489494BF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Persistence", "Persistence", "{AAF73DBB-2B37-44FD-A4CE-23273953E369}"
 EndProject
@@ -37,7 +37,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.VacationalRenta
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra.VacationalRental.Common", "Infraestructure\Infra.VacationalRental.Common\Infra.VacationalRental.Common.csproj", "{3C52C705-353C-4BC8-BAB5-3D9367523FF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.VacationRental.Calendar", "Application\Application.VacationRental.Calendar\Application.VacationRental.Calendar.csproj", "{C9927570-93E4-470A-B5A8-70D10EC0157D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.VacationRental.Calendar", "Application\Application.VacationRental.Calendar\Application.VacationRental.Calendar.csproj", "{C9927570-93E4-470A-B5A8-70D10EC0157D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PostmanCollection", "PostmanCollection", "{05F9C78B-4E58-44B7-B437-C5995D149343}"
+	ProjectSection(SolutionItems) = preProject
+		Tests\PostmanCollection\LodgifyBooking.postman_collection.json = Tests\PostmanCollection\LodgifyBooking.postman_collection.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -111,6 +116,7 @@ Global
 		{5DFA0B3D-AAA4-4A4B-B819-AE689B84D2BD} = {F54BEECE-F9BB-4513-9C2B-0BA81421417F}
 		{3C52C705-353C-4BC8-BAB5-3D9367523FF3} = {B8FC815B-691A-41A0-8E9F-5237F4B9D9AD}
 		{C9927570-93E4-470A-B5A8-70D10EC0157D} = {F54BEECE-F9BB-4513-9C2B-0BA81421417F}
+		{05F9C78B-4E58-44B7-B437-C5995D149343} = {2E448787-28B3-4ED1-A949-89FA8DBF5AB0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6A5319C5-4F21-41BF-B8A7-BC45868FEC89}

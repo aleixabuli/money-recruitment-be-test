@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Domain.VacationalRental.Repository.Contracts\Domain.VacationalRental.Repository.Contracts.csproj" />
     <ProjectReference Include="..\..\Domain\Domain.VacationalRental.Model\Domain.VacationalRental.Model.csproj" />
+    <ProjectReference Include="..\..\Domain\Domain.VacationalRental.Repository.Contracts\Domain.VacationalRental.Repository.Contracts.csproj" />
     <ProjectReference Include="..\Persistence.VacationalRental.Common\Persistence.VacationalRental.Common.csproj" />
   </ItemGroup>
 
