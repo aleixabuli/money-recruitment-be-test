@@ -7,7 +7,7 @@
 I saved to `/Tests/PostmanCollection/LodgifyBooking.postman_collection.json` a file that you can import to postman, so you can test the API.
 
 ## TODO:
-There is some thinks that, if I had more time, I would do:
+There is some things that, if I had more time, I would do:
 - Create a good management of the exceptions, so when the API returns an error, will show a proper message description and also a CORRECT `StatusCode`
 - Review another time the `GET api/v1/calendar` Calendar Controller endpoint. The code written there can be more readable and can be improved in terms of performance
 - Do more tests in the VacationalRental.Api.Tests project
