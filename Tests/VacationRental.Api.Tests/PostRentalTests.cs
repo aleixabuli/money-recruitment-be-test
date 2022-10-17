@@ -1,8 +1,7 @@
-﻿using System;
-using System.Net;
+﻿using Application.VacationRental.Booking.DTO.Request;
+using Application.VacationRental.Booking.DTO.Response;
 using System.Net.Http;
 using System.Threading.Tasks;
-using VacationRental.Api.Models;
 using Xunit;
 
 namespace VacationRental.Api.Tests
@@ -20,23 +19,24 @@ namespace VacationRental.Api.Tests
         [Fact]
         public async Task GivenCompleteRequest_WhenPostRental_ThenAGetReturnsTheCreatedRental()
         {
-            var request = new RentalBindingModel
+            var request = new RentalBindingModelRequest
             {
-                Units = 25
+                Units = 25,
+                PreparationTimeInDays = 1
             };
 
-            ResourceIdViewModel postResult;
+            RentalResourceIdViewModelResponse postResult;
             using (var postResponse = await _client.PostAsJsonAsync($"/api/v1/rentals", request))
             {
                 Assert.True(postResponse.IsSuccessStatusCode);
-                postResult = await postResponse.Content.ReadAsAsync<ResourceIdViewModel>();
+                postResult = await postResponse.Content.ReadAsAsync<RentalResourceIdViewModelResponse>();
             }
 
             using (var getResponse = await _client.GetAsync($"/api/v1/rentals/{postResult.Id}"))
             {
                 Assert.True(getResponse.IsSuccessStatusCode);
 
-                var getResult = await getResponse.Content.ReadAsAsync<RentalViewModel>();
+                var getResult = await getResponse.Content.ReadAsAsync<RentalViewModelResponse>();
                 Assert.Equal(request.Units, getResult.Units);
             }
         }

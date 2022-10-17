@@ -1,10 +1,8 @@
 ﻿using Application.VacationRental.Booking.DTO.Request;
 using Application.VacationRental.Booking.DTO.Response;
 using System;
-using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using VacationRental.Api.Models;
 using Xunit;
 
 namespace VacationRental.Api.Tests
@@ -22,30 +20,32 @@ namespace VacationRental.Api.Tests
         [Fact]
         public async Task GivenCompleteRequest_WhenPostBooking_ThenAGetReturnsTheCreatedBooking()
         {
-            var postRentalRequest = new RentalBindingModel
+            var postRentalRequest = new RentalBindingModelRequest
             {
-                Units = 4
+                Units = 4,
+                PreparationTimeInDays = 1
             };
 
-            ResourceIdViewModel postRentalResult;
+            RentalResourceIdViewModelResponse postRentalResult;
             using (var postRentalResponse = await _client.PostAsJsonAsync($"/api/v1/rentals", postRentalRequest))
             {
                 Assert.True(postRentalResponse.IsSuccessStatusCode);
-                postRentalResult = await postRentalResponse.Content.ReadAsAsync<ResourceIdViewModel>();
+                postRentalResult = await postRentalResponse.Content.ReadAsAsync<RentalResourceIdViewModelResponse>();
             }
 
             var postBookingRequest = new BookingBindingModelRequest
             {
                  RentalId = postRentalResult.Id,
                  Nights = 3,
-                 Start = new DateTime(2001, 01, 01)
+                 Start = new DateTime(2001, 01, 01),
+                 Unit = 1
             };
 
-            ResourceIdViewModel postBookingResult;
+            BookingResourceIdViewModelResponse postBookingResult;
             using (var postBookingResponse = await _client.PostAsJsonAsync($"/api/v1/bookings", postBookingRequest))
             {
                 Assert.True(postBookingResponse.IsSuccessStatusCode);
-                postBookingResult = await postBookingResponse.Content.ReadAsAsync<ResourceIdViewModel>();
+                postBookingResult = await postBookingResponse.Content.ReadAsAsync<BookingResourceIdViewModelResponse>();
             }
 
             using (var getBookingResponse = await _client.GetAsync($"/api/v1/bookings/{postBookingResult.Id}"))
@@ -62,23 +62,25 @@ namespace VacationRental.Api.Tests
         [Fact]
         public async Task GivenCompleteRequest_WhenPostBooking_ThenAPostReturnsErrorWhenThereIsOverbooking()
         {
-            var postRentalRequest = new RentalBindingModel
+            var postRentalRequest = new RentalBindingModelRequest
             {
-                Units = 1
+                Units = 1,
+                PreparationTimeInDays = 1
             };
 
-            ResourceIdViewModel postRentalResult;
+            RentalResourceIdViewModelResponse postRentalResult;
             using (var postRentalResponse = await _client.PostAsJsonAsync($"/api/v1/rentals", postRentalRequest))
             {
                 Assert.True(postRentalResponse.IsSuccessStatusCode);
-                postRentalResult = await postRentalResponse.Content.ReadAsAsync<ResourceIdViewModel>();
+                postRentalResult = await postRentalResponse.Content.ReadAsAsync<RentalResourceIdViewModelResponse>();
             }
 
             var postBooking1Request = new BookingBindingModelRequest
             {
                 RentalId = postRentalResult.Id,
                 Nights = 3,
-                Start = new DateTime(2002, 01, 01)
+                Start = new DateTime(2002, 01, 01),
+                Unit = 1
             };
 
             using (var postBooking1Response = await _client.PostAsJsonAsync($"/api/v1/bookings", postBooking1Request))
@@ -90,7 +92,8 @@ namespace VacationRental.Api.Tests
             {
                 RentalId = postRentalResult.Id,
                 Nights = 1,
-                Start = new DateTime(2002, 01, 02)
+                Start = new DateTime(2002, 01, 02),
+                Unit = 1
             };
 
             await Assert.ThrowsAsync<ApplicationException>(async () =>

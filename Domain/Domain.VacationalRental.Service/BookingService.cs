@@ -58,7 +58,7 @@ namespace Domain.VacationalRental.Service
             }
 
             var allBookings = await _bookingRepository.GetAll();
-            
+
             for (var i = 0; i < bookingNights; i++)
             {
                 var count = 0;
@@ -67,13 +67,12 @@ namespace Domain.VacationalRental.Service
                 {
                     count += IsBookingAvailableForRental(
                         bookingForEach, 
-                        bookingNights, 
-                        rentalId, 
+                        bookingNights,
+                        rental, 
                         bookingStart
                         );
                 }
 
-                
                 if (count >= rental.Units)
                 {
                     throw new ApplicationException("Not available");
@@ -120,22 +119,22 @@ namespace Domain.VacationalRental.Service
         /// </summary>
         /// <param name="bookingForEach"></param>
         /// <param name="bookingNights"></param>
-        /// <param name="rentalId"></param>
+        /// <param name="rental"></param>
         /// <param name="bookingStart"></param>
         /// <returns></returns>
         private int IsBookingAvailableForRental(
             Booking bookingForEach, 
             int bookingNights, 
-            int rentalId, 
+            Rental rental, 
             DateTime bookingStart
             )
         {
             int returnValue = 0;
 
-            if (bookingForEach.RentalId == rentalId
-                        && (bookingForEach.Start <= bookingStart.Date && bookingForEach.Start.AddDays(bookingForEach.Nights) > bookingStart.Date)
-                        || (bookingForEach.Start < bookingStart.AddDays(bookingNights) && bookingForEach.Start.AddDays(bookingForEach.Nights) >= bookingStart.AddDays(bookingNights))
-                        || (bookingForEach.Start > bookingStart && bookingForEach.Start.AddDays(bookingForEach.Nights) < bookingStart.AddDays(bookingNights)))
+            if (bookingForEach.RentalId == rental.Id
+                    && (bookingForEach.Start <= bookingStart.Date && bookingForEach.Start.AddDays(bookingForEach.Nights) > bookingStart.Date)
+                    || (bookingForEach.Start < bookingStart.AddDays(bookingNights) && bookingForEach.Start.AddDays(bookingForEach.Nights) >= bookingStart.AddDays(bookingNights))
+                    || (bookingForEach.Start > bookingStart && bookingForEach.Start.AddDays(bookingForEach.Nights) < bookingStart.AddDays(bookingNights)))
             {
                 returnValue = 1;
             }
