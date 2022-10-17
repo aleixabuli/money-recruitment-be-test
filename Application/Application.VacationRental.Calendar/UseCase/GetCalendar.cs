@@ -4,7 +4,6 @@ using Domain.VacationalRental.Service.Contracts.BookingServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Application.VacationRental.Calendar.UseCase

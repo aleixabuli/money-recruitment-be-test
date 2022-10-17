@@ -2,10 +2,7 @@
 using Application.VacationRental.Booking.DTO.Response;
 using Application.VacationRental.Booking.UseCaseContracts;
 using Domain.VacationalRental.Service.Contracts.BookingServices;
-using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -28,7 +25,7 @@ namespace Application.VacationRental.Booking.UseCase
         public async Task<RentalViewModelResponse> Execute(int rentalId)
         {
             var rental = await _rentalService.GetById(rentalId);
-            if (rental is null)//!_bookings.ContainsKey(bookingId))
+            if (rental is null)
             {
                 HttpResponseMessage message = new HttpResponseMessage();
                 message.ReasonPhrase = "Rental not found";

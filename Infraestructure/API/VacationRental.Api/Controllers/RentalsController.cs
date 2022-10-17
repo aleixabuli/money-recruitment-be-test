@@ -29,17 +29,9 @@ namespace VacationRental.Api.Controllers
 
             return Ok(rental);
         }
-        /*
-        [HttpPost]
-        public async Task<ActionResult> Post(RentalBindingModelRequest rental)//ResourceIdViewModel Post(RentalBindingModel model)
-        {
-            var response = await _createRental.Execute(rental);
 
-            return Ok(response);
-        }
-        */
         [HttpPost]
-        public async Task<ActionResult> Post(RentalBindingModelRequest rental)//ResourceIdViewModel Post(RentalBindingModel model)
+        public async Task<ActionResult> Post(RentalBindingModelRequest rental)
         {
             var response = await _createRental.Execute(rental);
 

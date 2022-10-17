@@ -3,15 +3,12 @@ using Persistence.VacationalRental.Booking.Model;
 using Persistence.VacationalRental.Common.Mapper;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Persistence.VacationalRental.Booking.Repository
 {
     public class BookingRepository : IBookingRepository
     {
-        
-        //private readonly IDictionary<int, BookingViewModelResponse> _bookings;
         private readonly IDictionary<int, BookingDB> _bookings;
         IMapperPersistence<Domain.VacationalRental.Model.BookingModel.Booking, BookingDB> _bookingMapper;
         public BookingRepository(

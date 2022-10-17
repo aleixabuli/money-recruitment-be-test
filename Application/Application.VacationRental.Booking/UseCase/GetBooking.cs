@@ -28,7 +28,7 @@ namespace Application.VacationRental.Booking.UseCase
         public async Task<BookingViewModelResponse> Execute(int bookingId)
         {
             var booking = await _bookingService.GetById(bookingId);
-            if (booking is null)//!_bookings.ContainsKey(bookingId))
+            if (booking is null)
             {
                 HttpResponseMessage message = new HttpResponseMessage();
                 message.ReasonPhrase = "Booking not found";
