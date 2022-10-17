@@ -1,0 +1,163 @@
+{
+	"info": {
+		"_postman_id": "ce1e7c42-74f8-440a-97f1-d6e378a541b4",
+		"name": "LodgifyBooking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "BookingsController",
+			"item": [
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:58783/api/v1/bookings/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "58783",
+							"path": [
+								"api",
+								"v1",
+								"bookings",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"rentalId\": 1,\r\n  \"start\": \"2022-10-16\",\r\n  \"nights\": 1,\r\n  \"unit\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:58783/api/v1/bookings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "58783",
+							"path": [
+								"api",
+								"v1",
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "RentalsController",
+			"item": [
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:58783/api/v1/rentals/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "58783",
+							"path": [
+								"api",
+								"v1",
+								"rentals",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"units\": 5,\r\n  \"preparationTimeInDays\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:58783/api/v1/rentals",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "58783",
+							"path": [
+								"api",
+								"v1",
+								"rentals"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CalendarController",
+			"item": [
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:58783/api/v1/calendar?rentalId=1&start=2022-10-16&nights=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "58783",
+							"path": [
+								"api",
+								"v1",
+								"calendar"
+							],
+							"query": [
+								{
+									"key": "rentalId",
+									"value": "1"
+								},
+								{
+									"key": "start",
+									"value": "2022-10-16"
+								},
+								{
+									"key": "nights",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

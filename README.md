@@ -1,3 +1,24 @@
+# The solution applied
+
+## The structure
+Ï decided to apply here a DDD structure, applying the 3 big layers: application, infraestructure/persistence and domain, so the code will be more readable and expandable.
+
+## Postman
+I saved to `/Tests/PostmanCollection/LodgifyBooking.postman_collection.json` a file that you can import to postman, so you can test the API.
+
+## TODO:
+There is some things that, if I had more time, I would do:
+- Migrate the project to `.Net Core 6`, so we can benefit of all new features and performance that offers
+- Create a good management of the exceptions, so when the API returns an error, will show a proper message description and also a CORRECT `HTTP Code`
+- Review another time the `GET api/v1/calendar` Calendar Controller endpoint. The code written there can be more readable and can be improved in terms of performance
+- Do more tests in the VacationalRental.Api.Tests project
+- Create the optional PUT endpoint
+- I do not had enough time to do a good tests in Postman. I know how Postman works and all the possibilities that offers, using the `Pre-requests` scripts and the `Tests` you can configure your Postman tests as a complement of the standard code tests
+
+
+-----------------------------------------------------------
+
+
 ## How we'd like to recieve the soluion?
 
 1. Clone this repository and upload it as a new public repository in your github account
