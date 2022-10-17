@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Application.VacationRental.Booking.DTO.Response;
-using Application.VacationRental.Calendar.DTO.Request;
 using Application.VacationRental.Calendar.UseCaseContracts;
 using Microsoft.AspNetCore.Mvc;
 using VacationRental.Api.Models;

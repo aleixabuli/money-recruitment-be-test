@@ -49,5 +49,31 @@ namespace Domain.VacationalRental.Service
 
             return key;
         }
+
+        public async Task<object> CreateRental(int rentalUnits, int preparationInDays)
+        {
+            var allRentals = await _rentalRepository.GetAll();
+
+            var key = new RentalResourceIdViewModelResponse { Id = allRentals.Keys.Count + 1 };
+
+            _rentalRepository.Create(
+                key.Id,
+                rentalUnits,
+                preparationInDays
+                );
+
+            return key;
+        }
+
+        public async Task OccupyUnit(
+            int rentalId, 
+            int unit
+            )
+        {
+            await _rentalRepository.OccupyUnit(
+                rentalId,
+                unit
+                );
+        }
     }
 }

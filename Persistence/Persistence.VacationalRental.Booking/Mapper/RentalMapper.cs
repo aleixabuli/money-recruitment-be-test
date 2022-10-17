@@ -16,7 +16,9 @@ namespace Persistence.VacationalRental.Booking.Mapper
             Domain.VacationalRental.Model.BookingModel.Rental domainModel = new Domain.VacationalRental.Model.BookingModel.Rental()
             {
                 Id = persistence.Id,
-                Units = persistence.Units
+                Units = persistence.Units,
+                PreparationTimeInDays = persistence.PreparationTimeInDays,
+                OccupiedUnitsNumber = persistence.OccupiedUnitsNumber
             };
 
             return domainModel;

@@ -14,13 +14,15 @@ namespace Domain.VacationalRental.Service.Contracts.BookingServices
         Task VerifyRentalUnitsAvailability(
             int bookingNights, 
             int rentalId, DateTime 
-            bookingStart
+            bookingStart,
+            int unit
             );
 
         Task<object> CreateBooking(
             int bookingNights,
             int rentalId,
-            DateTime bookingStart
+            DateTime bookingStart,
+            int unit
             );
 
         Task<IDictionary<int, Booking>> GetAll();

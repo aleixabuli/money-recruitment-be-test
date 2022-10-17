@@ -3,6 +3,7 @@ using Application.VacationRental.Calendar.UseCaseContracts;
 using Domain.VacationalRental.Service.Contracts.BookingServices;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,6 +32,7 @@ namespace Application.VacationRental.Calendar.UseCase
 
             await _rentalService.VerifyById(rentalId);
 
+            var actualRental = await _rentalService.GetById(rentalId);
             var allBookings = await _bookingService.GetAll();
 
             var result = new CalendarViewModelResponse
@@ -39,28 +41,92 @@ namespace Application.VacationRental.Calendar.UseCase
                 Dates = new List<CalendarDateViewModelResponse>()
             };
 
-            //THIS double foreach structure is VERY inefficient.
-            //In an environment that we have a database, the resultant
-            //value will be extracted directly using a single query from the database
-            for (var i = 0; i < nights; i++)
+            //THIS double foreach structure (and the previous GetAll function call) are VERY inefficient.
+            //In an environment that we have a database, the result
+            //value will be extracted directly using a single query from the database, 
+            //so this will be the fastest way to get all the required data
+            
+            CalendarDateViewModelResponse dateToAddToResult = null;
+            var unitIsCleaned = false;
+            for (var numberOfNights = 0; numberOfNights < nights; numberOfNights++)
             {
-                var date = new CalendarDateViewModelResponse
+                if(dateToAddToResult is null || !unitIsCleaned)
                 {
-                    Date = start.Date.AddDays(i),
-                    Bookings = new List<CalendarBookingViewModelResponse>()
-                };
-
-                foreach (var booking in allBookings.Values)
-                {
-                    if (booking.RentalId == rentalId
-                        && booking.Start <= date.Date && booking.Start.AddDays(booking.Nights) > date.Date)
+                    dateToAddToResult = new CalendarDateViewModelResponse
                     {
-                        date.Bookings.Add(new CalendarBookingViewModelResponse { Id = booking.Id });
+                        Date = start.Date.AddDays(numberOfNights),
+                        Bookings = new List<CalendarBookingViewModelResponse>(),
+                        PreparationTimes = new List<PreparationTimesResponse>()
+                    };
+                }
+                else if (unitIsCleaned)
+                {
+                    unitIsCleaned = false;
+                }
+
+                var bookingsFiltered = allBookings.Values.Where(b =>
+                    b.RentalId == rentalId
+                    && b.Start <= dateToAddToResult.Date 
+                    && b.Start.AddDays(b.Nights) > dateToAddToResult.Date
+                    ).OrderBy(b => b.Unit);
+
+                
+                foreach (var booking in bookingsFiltered)
+                {
+                    dateToAddToResult.Bookings.Add(new CalendarBookingViewModelResponse
+                    {
+                        Id = booking.Id,
+                        Unit = booking.Unit
+                    });
+                }
+
+                result.Dates.Add(dateToAddToResult);
+            }
+
+            //build PreparationTimes structure
+            CalendarDateViewModelResponse[] resultDatesCopy = new CalendarDateViewModelResponse[result.Dates.Count];
+            result.Dates.CopyTo(resultDatesCopy);
+            
+            CalendarDateViewModelResponse yesterdayDate = null;
+            int index = 0;
+            
+            foreach (var actualDate in resultDatesCopy)
+            {
+                if (yesterdayDate is null)
+                {
+                    //first iteration
+                    yesterdayDate = actualDate;
+                }
+                else
+                {
+                    //the rest of iterations
+                    
+                    foreach (var yesterdayBooking in yesterdayDate.Bookings)
+                    {
+                        if(actualDate.Bookings.FirstOrDefault(b => b.Unit== yesterdayBooking.Unit) == null)
+                        {
+                            //The Unit is not now occupied, so it must to be cleaned.
+                            //We inform the Unit to preparate
+                            for (int prepDays = 0; prepDays < actualRental.PreparationTimeInDays; prepDays++)
+                            {
+                                if((index + prepDays) < result.Dates.Count())
+                                {
+                                    result.Dates[index + prepDays].PreparationTimes.Add(
+                                        new PreparationTimesResponse() { Unit = yesterdayBooking.Unit });
+                                }
+                                
+                            }
+                        }
+
                     }
                 }
 
-                result.Dates.Add(date);
+
+                yesterdayDate = actualDate;
+                index++;
             }
+
+
 
             return result;
         }

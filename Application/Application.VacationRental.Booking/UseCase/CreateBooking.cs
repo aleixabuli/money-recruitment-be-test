@@ -35,12 +35,18 @@ namespace Application.VacationRental.Booking.UseCase
 
             await _rentalService.VerifyById(newBookingRequest.RentalId);
 
-            await _bookingService.VerifyRentalUnitsAvailability(newBookingRequest.Nights, newBookingRequest.RentalId, newBookingRequest.Start);
+            await _bookingService.VerifyRentalUnitsAvailability(
+                newBookingRequest.Nights, 
+                newBookingRequest.RentalId, 
+                newBookingRequest.Start,
+                newBookingRequest.Unit
+                );
 
             BookingResourceIdViewModelResponse newBooking = (BookingResourceIdViewModelResponse) await _bookingService.CreateBooking(
                 newBookingRequest.Nights, 
                 newBookingRequest.RentalId, 
-                newBookingRequest.Start
+                newBookingRequest.Start,
+                newBookingRequest.Unit
                 );
 
             return newBooking;

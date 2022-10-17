@@ -3,5 +3,6 @@
     public class CalendarBookingViewModelResponse
     {
         public int Id { get; set; }
+        public int Unit { get; set; }
     }
 }

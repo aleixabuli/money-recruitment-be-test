@@ -1,11 +1,10 @@
-﻿using Application.VacationRental.Booking.DTO.Request;
-using Application.VacationRental.Booking.DTO.Response;
+﻿using Application.VacationRental.Booking.DTO.Response;
 using Domain.VacationalRental.Model.BookingModel;
 using Domain.VacationalRental.Repository.Contracts.Booking;
 using Domain.VacationalRental.Service.Contracts.BookingServices;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Domain.VacationalRental.Service
@@ -42,19 +41,27 @@ namespace Domain.VacationalRental.Service
         public async Task VerifyRentalUnitsAvailability(
             int bookingNights, 
             int rentalId, 
-            DateTime bookingStart
+            DateTime bookingStart,
+            int unit
             )
         {
-            //THIS double foreach structure is VERY inefficient.
+            //THIS double foreach structure (and this "GetAll" call) are VERY inefficient.
             //In an environment that we have a database, the "count"
             //value will be extracted directly using a single query from the database
 
+            var rental = await _rentalService.GetById(rentalId);
+
+            if (rental.OccupiedUnitsNumber.ContainsKey(unit) 
+                && rental.OccupiedUnitsNumber[unit] == true)
+            {
+                throw new ApplicationException("Unit not available");
+            }
+
+            var allBookings = await _bookingRepository.GetAll();
+            
             for (var i = 0; i < bookingNights; i++)
             {
                 var count = 0;
-
-                var allBookings = await _bookingRepository.GetAll();
-
 
                 foreach (var bookingForEach in allBookings.Values)
                 {
@@ -66,8 +73,7 @@ namespace Domain.VacationalRental.Service
                         );
                 }
 
-                var rental = await _rentalService.GetById(rentalId);
-
+                
                 if (count >= rental.Units)
                 {
                     throw new ApplicationException("Not available");
@@ -79,7 +85,8 @@ namespace Domain.VacationalRental.Service
         public async Task<object> CreateBooking(
             int bookingNights, 
             int rentalId, 
-            DateTime bookingStart
+            DateTime bookingStart,
+            int unit
             )
         {
             var allBookings = await _bookingRepository.GetAll();
@@ -90,7 +97,13 @@ namespace Domain.VacationalRental.Service
                 key.Id, 
                 bookingNights, 
                 rentalId, 
-                bookingStart
+                bookingStart,
+                unit
+                );
+
+            await _rentalService.OccupyUnit(
+                rentalId, 
+                unit
                 );
 
             return key;
@@ -110,19 +123,24 @@ namespace Domain.VacationalRental.Service
         /// <param name="rentalId"></param>
         /// <param name="bookingStart"></param>
         /// <returns></returns>
-        private int IsBookingAvailableForRental(Booking bookingForEach, int bookingNights, int rentalId, DateTime bookingStart)
+        private int IsBookingAvailableForRental(
+            Booking bookingForEach, 
+            int bookingNights, 
+            int rentalId, 
+            DateTime bookingStart
+            )
         {
-            int returValue = 0;
+            int returnValue = 0;
 
             if (bookingForEach.RentalId == rentalId
                         && (bookingForEach.Start <= bookingStart.Date && bookingForEach.Start.AddDays(bookingForEach.Nights) > bookingStart.Date)
                         || (bookingForEach.Start < bookingStart.AddDays(bookingNights) && bookingForEach.Start.AddDays(bookingForEach.Nights) >= bookingStart.AddDays(bookingNights))
                         || (bookingForEach.Start > bookingStart && bookingForEach.Start.AddDays(bookingForEach.Nights) < bookingStart.AddDays(bookingNights)))
             {
-                returValue++;
+                returnValue = 1;
             }
 
-            return returValue;
+            return returnValue;
         }
 
     }

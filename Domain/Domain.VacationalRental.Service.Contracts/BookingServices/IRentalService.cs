@@ -8,5 +8,7 @@ namespace Domain.VacationalRental.Service.Contracts.BookingServices
         Task<Rental> GetById(int rentalId);
         Task<Rental> VerifyById(int rentalId);
         Task<object> CreateRental(int rentalUnits);
+        Task<object> CreateRental(int rentalUnits, int preparationInDays);
+        Task OccupyUnit(int rentalId, int unit);
     }
 }

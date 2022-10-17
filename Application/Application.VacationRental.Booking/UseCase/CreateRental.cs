@@ -29,39 +29,13 @@ namespace Application.VacationRental.Booking.UseCase
             _rentalService = rentalService;
         }
 
-        public async Task<BookingViewModelResponse> Execute(BookingBindingModelRequest newBookingRequest)
-        {
-            _bookingService.VerifyHasNights(newBookingRequest.Nights);
-
-            await _rentalService.VerifyById(newBookingRequest.RentalId);
-
-            await _bookingService.VerifyRentalUnitsAvailability(
-                newBookingRequest.Nights, 
-                newBookingRequest.RentalId, 
-                newBookingRequest.Start
-                );
-
-            BookingViewModelResponse newBooking = (BookingViewModelResponse) await _bookingService.CreateBooking(
-                newBookingRequest.Nights, 
-                newBookingRequest.RentalId, 
-                newBookingRequest.Start
-                );
-
-            return newBooking;
-        }
-
         public async Task<RentalResourceIdViewModelResponse> Execute(RentalBindingModelRequest rental)
         {
-            var result = (RentalResourceIdViewModelResponse) await _rentalService.CreateRental(rental.Units);
-            /*
-            var key = new ResourceIdViewModel { Id = _rentals.Keys.Count + 1 };
+            var result = (RentalResourceIdViewModelResponse) await _rentalService.CreateRental(
+                rental.Units,
+                rental.PreparationTimeInDays
+                );
 
-            _rentals.Add(key.Id, new RentalViewModel
-            {
-                Id = key.Id,
-                Units = model.Units
-            });
-            */
             return result;
         }
     }

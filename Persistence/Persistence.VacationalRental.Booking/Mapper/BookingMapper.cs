@@ -18,7 +18,8 @@ namespace Persistence.VacationalRental.Booking.Mapper
                 Id = persistence.Id,
                 Nights = persistence.Nights,
                 RentalId = persistence.RentalId,
-                Start = persistence.Start
+                Start = persistence.Start,
+                Unit = persistence.Unit
             };
 
             return domainModel;

@@ -48,14 +48,17 @@ namespace Persistence.VacationalRental.Booking.Repository
             int keyId,
             int bookingNights,
             int rentalId,
-            DateTime bookingStart)
+            DateTime bookingStart,
+            int unit
+            )
         {
             _bookings.Add(keyId, new BookingDB
             {
                 Id = keyId,
                 Nights = bookingNights,
                 RentalId = rentalId,
-                Start = bookingStart
+                Start = bookingStart,
+                Unit = unit
             });
         }
     }

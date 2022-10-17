@@ -14,5 +14,6 @@ namespace Application.VacationRental.Booking.DTO.Request
 
         private DateTime _startIgnoreTime;
         public int Nights { get; set; }
+        public int Unit { get; set; }
     }
 }

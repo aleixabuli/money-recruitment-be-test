@@ -34,6 +34,31 @@ namespace Persistence.VacationalRental.Booking.Repository
             });
         }
 
+        public void Create(
+            int keyId,
+            int units,
+            int preparationInDays
+            )
+        {
+            var rental = new RentalDB
+            {
+                Id = keyId,
+                Units = units,
+                PreparationTimeInDays = preparationInDays,
+                OccupiedUnitsNumber = new Dictionary<int, bool>()
+            };
+
+            for (var i = 0; i < units; i++)
+            {
+                rental.OccupiedUnitsNumber.Add(i + 1, false);
+            }
+
+            _rentals.Add(
+                keyId, 
+                rental
+                );
+        }
+
         public async Task<IDictionary<int, Domain.VacationalRental.Model.BookingModel.Rental>> GetAll()
         {
             IDictionary<int, Domain.VacationalRental.Model.BookingModel.Rental> result = new Dictionary<int, Domain.VacationalRental.Model.BookingModel.Rental>();
@@ -53,6 +78,14 @@ namespace Persistence.VacationalRental.Booking.Repository
             }
             var bookingTarget = _rentalMapper.MapToDomainModel(_rentals[rentalId]);
             return bookingTarget;
+        }
+
+        public async Task OccupyUnit(
+            int rentalId, 
+            int unit
+            )
+        {
+            _rentals[rentalId].OccupiedUnitsNumber[unit] = true;
         }
     }
 }
